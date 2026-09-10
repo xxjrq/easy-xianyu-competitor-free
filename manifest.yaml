@@ -1,0 +1,19 @@
+name: easy-xianyu-competitor-free
+display_name: 免费闲鱼竞品分析
+version: 1.0.0
+description: 免费免第三方 API Key，搜索闲鱼公开同类商品并整理价格、成色和卖点对比。
+category: ecommerce
+author: xxjrq
+tags:
+  - xianyu
+  - competitor-research
+  - ecommerce
+  - easy-webbridge
+  - free
+  - no-api-key
+runtime:
+  name: easy-webbridge
+  endpoint: http://127.0.0.1:17777
+  prerequisite: Install Easy WebBridge from https://github.com/xxjrq/easy-webbridge; fallback https://gitee.com/xxjrq/easy-webbridge
+icon: icon-512.png
+self_test: node scripts/self-test.mjs
