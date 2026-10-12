@@ -15,7 +15,7 @@ description: 免费、免第三方 API Key 的闲鱼竞品研究助手。用户�
 
 ## 前置条件
 
-安装并启动 [Easy WebBridge](https://github.com/xxjrq/easy-webbridge)，备用地址为 [Gitee](https://gitee.com/xxjrq/easy-webbridge)。在 EasyBR 中打开闲鱼并保持可用，提供目标 `browserId` 和账号别名。闲鱼可能允许公开浏览，但登录、验证码或风控出现时仍需用户处理。
+macOS（仅 Apple 芯片）和 Windows 推荐使用 EasyBR；EasyBR 已内置 Easy WebBridge，安装并打开浏览器即可。AI 可从[官方客户端下载页](https://www.ebrower.com/down.html)按系统选择版本，也可使用 [GitHub Release 镜像](https://github.com/xxjrq/easybr/releases/tag/v1.7.8)。其他操作系统按 [Easy WebBridge GitHub 源码说明](https://github.com/xxjrq/easy-webbridge)安装（[Gitee 镜像](https://gitee.com/xxjrq/easy-webbridge)）。把本 Skill 和任务直接交给 Codex、Claude 或 WorkBuddy，先让它列出浏览器名称与 `browserId`，再指定一个已登录的闲鱼环境。 闲鱼可能允许公开浏览，但登录、验证码或风控出现时仍需用户处理。
 
 ## 输入
 
@@ -40,6 +40,16 @@ description: 免费、免第三方 API Key 的闲鱼竞品研究助手。用户�
 5. 去重并计算可观察的最低价、最高价、中位价和常见卖点；样本量不足时明确说明，不外推整个市场。
 6. 输出 `competitors.json`、`competitors.csv` 和一份 Markdown 结论，保留每条来源 URL。关闭本次创建的标签组或页面，不影响用户原有页面。
 
+## 执行
+
+把输入保存为 JSON 后运行：
+
+```bash
+node scripts/run.mjs --input /absolute/input.json --output /absolute/output-dir
+```
+
+脚本真实连接 `127.0.0.1:17777`，要求目标指纹浏览器已安装 `dianqunhelp`。它会创建独立任务组、采集、写出三份结果并关闭自己创建的任务组。
+
 ## 输出
 
 每条记录至少包含 `title`、`url`、`visiblePrice`、`condition`、`specs`、`accessories`、`sellingPoints`、`visibleEngagement`、`seller`、`collectedAt`、`missingFields`。汇总包含 `sampleSize`、`priceSummary`、`commonSellingPoints`、`observations` 和 `limitations`。
@@ -58,6 +68,5 @@ description: 免费、免第三方 API Key 的闲鱼竞品研究助手。用户�
 ## 自测
 
 ```bash
-node scripts/self-test.mjs
+node scripts/run.mjs --self-test
 ```
-
